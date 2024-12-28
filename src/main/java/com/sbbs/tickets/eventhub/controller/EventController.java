@@ -1,7 +1,6 @@
 package com.sbbs.tickets.eventhub.controller;
 
 import com.sbbs.tickets.eventhub.model.Event;
-import com.sbbs.tickets.eventhub.model.EventUser;
 import com.sbbs.tickets.eventhub.service.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
