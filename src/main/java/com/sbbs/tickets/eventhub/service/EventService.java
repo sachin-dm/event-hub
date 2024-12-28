@@ -13,7 +13,7 @@ public class EventService {
     @Autowired
     private EventRepository eventRepository;
 
-    public void saveUser(Event event) {
+    public void saveEvent(Event event) {
         eventRepository.saveAndFlush(event);
     }
 

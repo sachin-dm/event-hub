@@ -2,6 +2,7 @@ package com.sbbs.tickets.eventhub.controller;
 
 import com.sbbs.tickets.eventhub.model.Event;
 import com.sbbs.tickets.eventhub.service.EventService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -20,13 +21,13 @@ import java.net.URI;
 
 @RestController
 @RequestMapping("/events")
+@RequiredArgsConstructor
 public class EventController {
 
-    @Autowired
-    private EventService eventService;
+    private final EventService eventService;
 
     @GetMapping("/{eventId}")
-    public ResponseEntity<Event> getUser(@PathVariable String eventId) {
+    public ResponseEntity<Event> getEvent(@PathVariable String eventId) {
         Event event = eventService.getEvent(eventId);
         if (event != null) {
             return ResponseEntity.ok(event);
@@ -48,7 +49,7 @@ public class EventController {
 
     @PostMapping("/save")
     public ResponseEntity<Void> createEvent(@RequestBody Event event) {
-        eventService.saveUser(event);
+        eventService.saveEvent(event);
         return ResponseEntity
                 .created(URI.create("/events/" + event.getId()))
                 .build();
