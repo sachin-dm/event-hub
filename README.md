@@ -1,2 +1,2 @@
-# event-hub
-This service is responsible to perform CRUD on events/concerts
+# Event Hub
+This service handles CRUD operations for events and concerts data.
