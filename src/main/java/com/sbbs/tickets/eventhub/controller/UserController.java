@@ -2,7 +2,7 @@ package com.sbbs.tickets.eventhub.controller;
 
 import com.sbbs.tickets.eventhub.model.EventUser;
 import com.sbbs.tickets.eventhub.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -20,10 +20,10 @@ import java.net.URI;
 
 @RestController
 @RequestMapping("/users")
+@RequiredArgsConstructor
 public class UserController {
 
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
 
     @GetMapping("/{userId}")
     public ResponseEntity<EventUser> getUser(@PathVariable String userId) {
