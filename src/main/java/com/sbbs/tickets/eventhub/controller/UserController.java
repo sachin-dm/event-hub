@@ -8,13 +8,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 
@@ -28,11 +22,7 @@ public class UserController {
     @GetMapping("/{userId}")
     public ResponseEntity<EventUser> getUser(@PathVariable String userId) {
         EventUser eventUser = userService.getUser(userId);
-        if (eventUser != null) {
-            return ResponseEntity.ok(eventUser);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+        return eventUser != null ? ResponseEntity.ok(eventUser) : ResponseEntity.notFound().build();
     }
 
     @GetMapping("/list")
@@ -42,15 +32,12 @@ public class UserController {
                                      @RequestParam(defaultValue = "true") boolean ascending) {
         Sort sort = ascending ? Sort.by(sortBy).ascending() : Sort.by(sortBy).descending();
         Pageable pageable = PageRequest.of(page, size, sort);
-
         return userService.listUsers(pageable);
     }
 
     @PostMapping("/save")
     public ResponseEntity<Void> createUser(@RequestBody EventUser eventUser) {
         userService.saveUser(eventUser);
-        return ResponseEntity
-                .created(URI.create("/users/" + eventUser.getId()))
-                .build();
+        return ResponseEntity.created(URI.create("/users/" + eventUser.getId())).build();
     }
 }
