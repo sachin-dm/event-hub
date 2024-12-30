@@ -52,7 +52,7 @@ public abstract class BaseIntegrationTest {
     @BeforeAll
     public void setup() {
         try (Connection connection = DriverManager.getConnection(jdbcUrl, username, password)) {
-            System.out.println("Connected to the database!");
+            log.info("Connected to the database!");
 
             // Load the SQL script
             InputStream inputStream = BaseIntegrationTest.class.getClassLoader().getResourceAsStream("event_schema.sql");
